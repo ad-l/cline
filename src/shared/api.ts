@@ -22,6 +22,7 @@ export type ApiProvider =
 	| "asksage"
 	| "xai"
 	| "sambanova"
+	| "confwhisper"
 
 export interface ApiHandlerOptions {
 	apiModelId?: string
@@ -49,6 +50,12 @@ export interface ApiHandlerOptions {
 	awsBedrockEndpoint?: string
 	vertexProjectId?: string
 	vertexRegion?: string
+	confWhisperUrl?: string
+	confWhisperKMS?: string
+	confWhisperKey?: string
+	confWhisperModelId?: string
+	confWhisperModelInfo?: OpenAiCompatibleModelInfo
+	confWhisperHeaders?: Record<string, string>
 	openAiBaseUrl?: string
 	openAiApiKey?: string
 	openAiModelId?: string
@@ -116,6 +123,23 @@ export interface ModelInfo {
 export interface OpenAiCompatibleModelInfo extends ModelInfo {
 	temperature?: number
 	isR1FormatRequired?: boolean
+}
+
+// Confidential Whisper
+// https://openrouter.ai/models?order=newest&supported_parameters=tools
+export type confWhisperModelId = keyof typeof confWhisperModelInfo
+export const confWhisperDefaultModelId: confWhisperModelId = "deepseek-ai/DeepSeek-R1"
+export const confWhisperModelInfo = {
+	"deepseek-ai/DeepSeek-R1": {
+		maxTokens: 8_000,
+		contextWindow: 64_000,
+		supportsImages: false,
+		supportsPromptCache: true,
+		inputPrice: 0,
+		outputPrice: 2.19,
+		cacheWritesPrice: 0.55,
+		cacheReadsPrice: 0.14,
+	},
 }
 
 // Anthropic

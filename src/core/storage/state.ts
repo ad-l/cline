@@ -69,6 +69,12 @@ export async function getAllExtensionState(context: vscode.ExtensionContext) {
 		awsUseProfile,
 		vertexProjectId,
 		vertexRegion,
+		confWhisperUrl,
+		confWhisperKMS,
+		confWhisperKey,
+		confWhisperModelId,
+		confWhisperModelInfo,
+		confWhisperHeaders,
 		openAiBaseUrl,
 		openAiApiKey,
 		openAiModelId,
@@ -142,6 +148,12 @@ export async function getAllExtensionState(context: vscode.ExtensionContext) {
 		getGlobalState(context, "awsUseProfile") as Promise<boolean | undefined>,
 		getGlobalState(context, "vertexProjectId") as Promise<string | undefined>,
 		getGlobalState(context, "vertexRegion") as Promise<string | undefined>,
+		getGlobalState(context, "confWhisperUrl") as Promise<string | undefined>,
+		getGlobalState(context, "confWhisperKMS") as Promise<string | undefined>,
+		getSecret(context, "confWhisperKey") as Promise<string | undefined>,
+		getGlobalState(context, "confWhisperModelId") as Promise<string | undefined>,
+		getGlobalState(context, "confWhisperModelInfo") as Promise<ModelInfo | undefined>,
+		getGlobalState(context, "confWhisperHeaders") as Promise<Record<string, string> | undefined>,
 		getGlobalState(context, "openAiBaseUrl") as Promise<string | undefined>,
 		getSecret(context, "openAiApiKey") as Promise<string | undefined>,
 		getGlobalState(context, "openAiModelId") as Promise<string | undefined>,
@@ -256,6 +268,12 @@ export async function getAllExtensionState(context: vscode.ExtensionContext) {
 			awsUseProfile,
 			vertexProjectId,
 			vertexRegion,
+			confWhisperUrl,
+			confWhisperKMS,
+			confWhisperKey,
+			confWhisperModelId,
+			confWhisperModelInfo,
+			confWhisperHeaders,
 			openAiBaseUrl,
 			openAiApiKey,
 			openAiModelId,
@@ -336,6 +354,12 @@ export async function updateApiConfiguration(context: vscode.ExtensionContext, a
 		awsUseProfile,
 		vertexProjectId,
 		vertexRegion,
+		confWhisperUrl,
+		confWhisperKMS,
+		confWhisperKey,
+		confWhisperModelId,
+		confWhisperModelInfo,
+		confWhisperHeaders,
 		openAiBaseUrl,
 		openAiApiKey,
 		openAiModelId,
@@ -393,6 +417,12 @@ export async function updateApiConfiguration(context: vscode.ExtensionContext, a
 	await updateGlobalState(context, "awsUseProfile", awsUseProfile)
 	await updateGlobalState(context, "vertexProjectId", vertexProjectId)
 	await updateGlobalState(context, "vertexRegion", vertexRegion)
+	await updateGlobalState(context, "confWhisperUrl", confWhisperUrl)
+	await updateGlobalState(context, "confWhisperKMS", confWhisperKMS)
+	await storeSecret(context, "confWhisperKey", confWhisperKey)
+	await updateGlobalState(context, "confWhisperModelId", confWhisperModelId)
+	await updateGlobalState(context, "confWhisperModelInfo", confWhisperModelInfo)
+	await updateGlobalState(context, "confWhisperHeaders", confWhisperHeaders || {})
 	await updateGlobalState(context, "openAiBaseUrl", openAiBaseUrl)
 	await storeSecret(context, "openAiApiKey", openAiApiKey)
 	await updateGlobalState(context, "openAiModelId", openAiModelId)

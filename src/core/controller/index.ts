@@ -859,6 +859,9 @@ export class Controller {
 			await updateGlobalState(this.context, "previousModeThinkingBudgetTokens", apiConfiguration.thinkingBudgetTokens)
 			await updateGlobalState(this.context, "previousModeReasoningEffort", apiConfiguration.reasoningEffort)
 			switch (apiConfiguration.apiProvider) {
+				case "confwhisper":
+					await updateGlobalState(this.context, "previousModeModelId", apiConfiguration.confWhisperModelId)
+					break
 				case "anthropic":
 				case "bedrock":
 				case "vertex":
@@ -932,6 +935,10 @@ export class Controller {
 						break
 					case "vscode-lm":
 						await updateGlobalState(this.context, "vsCodeLmModelSelector", newVsCodeLmModelSelector)
+						break
+					case "confwhisper":
+						await updateGlobalState(this.context, "confWhisperModelId", newModelId)
+						await updateGlobalState(this.context, "confWhisperModelInfo", newModelInfo)
 						break
 					case "openai":
 						await updateGlobalState(this.context, "openAiModelId", newModelId)

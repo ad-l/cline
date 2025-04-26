@@ -22,6 +22,7 @@ import { LiteLlmHandler } from "./providers/litellm"
 import { AskSageHandler } from "./providers/asksage"
 import { XAIHandler } from "./providers/xai"
 import { SambanovaHandler } from "./providers/sambanova"
+import { ConfWhisperHandler } from "./providers/confwhisper"
 
 export interface ApiHandler {
 	createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream
@@ -36,6 +37,8 @@ export interface SingleCompletionHandler {
 export function buildApiHandler(configuration: ApiConfiguration): ApiHandler {
 	const { apiProvider, ...options } = configuration
 	switch (apiProvider) {
+		case "confwhisper":
+			return new ConfWhisperHandler(options)
 		case "anthropic":
 			return new AnthropicHandler(options)
 		case "openrouter":
